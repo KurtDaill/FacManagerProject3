@@ -30,6 +30,13 @@
         <!-- collaborators and configuration for this bean go here -->
     </bean>
 
+    <bean id="updater" class ="src.ManagerPackage.Updater">
+        <constructor-arg index="0" ref="tracker"/>
+        <constructor-arg index="1" ref="useMan"/>
+        <constructor-arg index="2" ref="maintMan"/>
+        <constructor-arg index="3" ref="scheduleMan"/>
+        <!-- collaborators and configuration for this bean go here -->
+    </bean>
     <!-- more bean definitions go here -->
 
 </beans>

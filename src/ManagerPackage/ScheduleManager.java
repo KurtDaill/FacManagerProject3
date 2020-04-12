@@ -5,13 +5,9 @@ import java.util.*;
 
 public class ScheduleManager {
     private Map<String, List<TimeStamp>> facilityDirectory;
-    private Date currentDate = new Date();
     private UsageManager useMan;
     private MaintenanceManager mainMan;
     private FacilityTracker tracker;
-    public Date getDate(){
-        return currentDate;
-    }
 
     public ScheduleManager(UsageManager useMan, MaintenanceManager mainMan, FacilityTracker tracker) {
         this.useMan = useMan;
@@ -41,11 +37,6 @@ public class ScheduleManager {
                 }
             }
         }
-    }
-
-    public void updateManagers(){
-        useMan.update(currentDate);
-        mainMan.update(currentDate);
     }
     
     public void updateFacilities(Facilities newFac){

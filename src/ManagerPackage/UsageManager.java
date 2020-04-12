@@ -9,7 +9,7 @@ public class UsageManager{
 	Map<String, List<UsageTimeStamp>> usageHistoryDirectory = new HashMap<String, List<UsageTimeStamp>>();
 	FacilityTracker tracker;
 	ScheduleManager scheduler;
-
+	Date currentDate;
 	public UsageManager(FacilityTracker tracker, ScheduleManager scheduler) {
 		this.tracker = tracker;
 		this.scheduler = scheduler;
@@ -27,7 +27,7 @@ public class UsageManager{
 	}
 
 	float calcUsageRate(String facName){
-		int timeSinceBuildingOpen = tracker.lookUp(facName).getStart().compareTo(scheduler.getDate());
+		int timeSinceBuildingOpen = tracker.lookUp(facName).getStart().compareTo(currentDate);
 		int totalUsageTime = 0;
 		for(Map.Entry<String, List<UsageTimeStamp>> entry : usageHistoryDirectory.entrySet()) {
 			List<UsageTimeStamp> list = entry.getValue();
@@ -39,7 +39,9 @@ public class UsageManager{
 		int usageRate = totalUsageTime / timeSinceBuildingOpen;
 		return usageRate;
 	}
-	void update(Date currentDate) {
+
+	void update(Date newDate) {
+		currentDate = newDate;
 		for (Map.Entry<String, List<UsageTimeStamp>> entry : usageDirectory.entrySet()) {
 			List<UsageTimeStamp> schedule = entry.getValue();
 			for (int i = 0; i < schedule.size(); i++) {
